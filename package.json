@@ -2,10 +2,10 @@
   "name": "@codica/code",
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/Porico94/fullstack-javascript-project-103/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Porico94/fullstack-javascript-project-103/actions)",
-  "main": "index.js",
+  "main": "gendiff.js",
   "type": "module",
   "bin": {
-    "gendiff": "./bin/gendiff.js" 
+    "gendiff": "./bin/gendiff.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^12.1.0"
+    "commander": "^12.1.0",
+    "lodash": "^4.17.21"
   }
 }
