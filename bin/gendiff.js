@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import { Command } from 'commander';
-import readFile from './fileReader.js';
-import gendiff from './comparation.js';
+import readFile from '../src/fileReader.js';
+import gendiff from '../src/comparation.js';
 
 const program = new Command();
 
@@ -16,4 +16,5 @@ program
     const file2Data = readFile(filepath2);
     console.log(gendiff(file1Data, file2Data));
   })
+  // eslint-disable-next-line no-undef
   .parse(process.argv);
