@@ -8,13 +8,15 @@
     "gendiff": "./bin/gendiff.js"
   },
   "scripts": {
-    "test": "npm test -- --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "lint": "eslint ."
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "commander": "^12.1.0",
+    "js-yaml": "^4.1.0",
     "lodash": "^4.17.21"
   },
   "devDependencies": {
