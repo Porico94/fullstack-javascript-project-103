@@ -7,8 +7,8 @@ const gendiff = (file1, file2) => {
   let uncommonKeys1 = [];
   let uncommonKeys2 = [];
 
-  const objectKeysFile1 = Object.keys(file1);
-  const objectKeysFile2 = Object.keys(file2);
+  const objectKeysFile1 = Object.keys(file1); // Obtenemos las claves de file1
+  const objectKeysFile2 = Object.keys(file2); // Obtenemos las claves de file2
 
   //Comparamos los keys y values de los dos objetos y lo guardamos en un array
   for (const key1 of objectKeysFile1) {
