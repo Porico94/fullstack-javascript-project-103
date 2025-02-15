@@ -1,29 +1,24 @@
 #!/usr/bin/env node
-
-import { Command } from 'commander';
-import readFile from '../src/fileReader.js';
-import buildDiff from '../src/buildDiff.js';
-import formatDiff from '../src/formatDiff.js'
+/* eslint-disable no-undef */
+import { Command } from "commander";
+import fileReader from "../src/fileReader.js";
+import buildDiff from "../src/buildDiff.js";
+import formatDiff from "../src/formats/indexFormat.js";
 
 const program = new Command();
+
 program
-  .arguments('<filepath1> <filepath2>')
-  .option('-f, --format <type>', 'output format', 'stylish')
-  .description('Compares two configuration files and shows a difference.')
-  .version('1.0.0')
-  .action((filepath1, filepath2, options) => {    
-    //Lee los archivos
-    const file1Data = readFile(filepath1);
-    const file2Data = readFile(filepath2);
+  .name("gendiff")
+  .description("Calculates the difference between two files and displays them")
+  .version("0.1.0")
+  .arguments("<filename1> <filename2>")
+  .option("-f, --format <type>", "output format", "stylish")
+  .action((filename1, filename2, options) => {
+    const file1Object = fileReader(filename1);
+    const file2Object = fileReader(filename2);
 
-    //Calcula las diferencias
-    const diff = buildDiff(file1Data, file2Data);
-
-    //Formatea las diferencias según el formato especificado
-    const formattedDiff = formatDiff(diff, options.format);
-
-    //Muestra el resultado en la consola
-    console.log(formattedDiff);
+    const data = buildDiff(file1Object, file2Object);
+    const format = formatDiff(data, options.format);
+    console.log(format);
   })
-  // eslint-disable-next-line no-undef
   .parse(process.argv);

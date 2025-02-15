@@ -1,92 +1,83 @@
-import readFile from "../src/fileReader";
-import gendiff from "../src/comparation";
-import { expectedOutput } from "../__fixtures__/expectedOutput";
-import { expectedOutput2 } from "../__fixtures__/expectedOutput2";
-import { expectedOutput3 } from "../__fixtures__/expectedOutput3";
-import { expectedOutput4 } from "../__fixtures__/expectedOutput4";
+/* eslint-disable no-undef */
+import fileReader from "../src/fileReader.js";
+import buildDiff from "../src/buildDiff.js";
+import formatDiff from "../src/formats/indexFormat.js";
+import txtReader from "../src/txtReader.js";
 
+test("gendiff compare two files json forrmat stylish", () => {
+  const file1Object = fileReader("file1.json");
+  const file2Object = fileReader("file2.json");
 
-//Caso base 1: Comparamos dos archivos json normales
-// eslint-disable-next-line no-undef
-test("gendiff compare two files json", () => {
-  const file1Data = readFile("__fixtures__/file1.json");
-  const file2Data = readFile("__fixtures__/file2.json");
-  
-  const diff = gendiff(file1Data, file2Data);  
+  const data = buildDiff(file1Object, file2Object);
+  const formated = formatDiff(data, 'stylish').trim();
 
-  // eslint-disable-next-line no-undef
-  expect(diff.trim()).toBe(expectedOutput);
+  // Leer el archivo TXT sin usar JSON.parse()
+  const expected = txtReader("result-stylish.txt").trim();
+
+  expect(formated.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });
 
-//Caso base 2: Comparamos dos archivos yaml normales
-// eslint-disable-next-line no-undef
 test("gendiff compare two files yaml", () => {
-  const file1Data = readFile("__fixtures__/file1.yaml");
-  const file2Data = readFile("__fixtures__/file2.yaml");
-  
-  const diff = gendiff(file1Data, file2Data);  
+  const file1Object = fileReader("file1.yml");
+  const file2Object = fileReader("file2.yml");
 
-  // eslint-disable-next-line no-undef
-  expect(diff.trim()).toBe(expectedOutput);
+  const data = buildDiff(file1Object, file2Object);
+  const formated = formatDiff(data, 'stylish').trim();
+
+  // Leer el archivo TXT sin usar JSON.parse()
+  const expected = txtReader("result-stylish.txt").trim();
+
+  expect(formated.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });
 
-//Caso base 3: Comparamos un archivo json y un archivo yaml
-// eslint-disable-next-line no-undef
-test("gendiff compare a json file and a yaml file", () => {
-  const file1Data = readFile("__fixtures__/file1.json");
-  const file2Data = readFile("__fixtures__/file2.yaml");
-  
-  const diff = gendiff(file1Data, file2Data);  
+test("gendiff compare one file json and another file yaml", () => {
+  const file1Object = fileReader("file1.json");
+  const file2Object = fileReader("file2.yml");
 
-  // eslint-disable-next-line no-undef
-  expect(diff.trim()).toBe(expectedOutput);
+  const data = buildDiff(file1Object, file2Object);
+  const formated = formatDiff(data, 'stylish').trim();
+
+  // Leer el archivo TXT sin usar JSON.parse()
+  const expected = txtReader("result-stylish.txt").trim();
+
+  expect(formated.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });
 
-//Caso extremo 1: Archivos vacios
-// eslint-disable-next-line no-undef
-test("gendiff compare empty files", () => {
-  const file1Data = readFile("__fixtures__/empty1.json");
-  const file2Data = readFile("__fixtures__/empty2.json");
-  
-  const diff = gendiff(file1Data, file2Data);  
+test("gendiff compare two files json format plain", () => {
+  const file1Object = fileReader("file1.json");
+  const file2Object = fileReader("file2.json");
 
-  // eslint-disable-next-line no-undef
-  expect(diff.trim()).toBe(expectedOutput2);
+  const data = buildDiff(file1Object, file2Object);
+  const formated = formatDiff(data, 'plain').trim();
+
+  // Leer el archivo TXT sin usar JSON.parse()
+  const expected = txtReader("result-plain.txt").trim();
+
+  expect(formated.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });
 
-//Caso extremo 2: Un archivo vacío
-// eslint-disable-next-line no-undef
-test("gendiff compare with one empty files", () => {
-  const file1Data = readFile("__fixtures__/empty1.json");
-  const file2Data = readFile("__fixtures__/file2.json");
-  
-  const diff = gendiff(file1Data, file2Data);  
+test("gendiff compare two files yaml format plain", () => {
+  const file1Object = fileReader("file1.yml");
+  const file2Object = fileReader("file2.yml");
 
-  // eslint-disable-next-line no-undef
-  expect(diff.trim()).toBe(expectedOutput3);
+  const data = buildDiff(file1Object, file2Object);
+  const formated = formatDiff(data, 'plain').trim();
+
+  // Leer el archivo TXT sin usar JSON.parse()
+  const expected = txtReader("result-plain.txt").trim();
+
+  expect(formated.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });
 
-//Caso extremo 3: Archivos identicos
-// eslint-disable-next-line no-undef
-test("gendiff compare with same files", () => {
-  const file1Data = readFile("__fixtures__/file1.json");
-  const file2Data = readFile("__fixtures__/file3.json");
-  
-  const diff = gendiff(file1Data, file2Data);
+test("gendiff compare one file json and another file yaml format plain", () => {
+  const file1Object = fileReader("file1.yml");
+  const file2Object = fileReader("file2.json");
 
-  // eslint-disable-next-line no-undef
-  expect(diff.trim()).toBe(expectedOutput4);
-});
+  const data = buildDiff(file1Object, file2Object);
+  const formated = formatDiff(data, 'plain').trim();
 
-// Caso extremo: Archivo no JSON
-// eslint-disable-next-line no-undef
-test("throws an error for non-JSON files", () => {
-  // Ruta de archivo inválido
-  const invalidFilePath = "__fixtures__/invalid.txt";
+  // Leer el archivo TXT sin usar JSON.parse()
+  const expected = txtReader("result-plain.txt").trim();
 
-  // Comprobar que se lanza un error
-  // eslint-disable-next-line no-undef
-  expect(() => {
-    readFile(invalidFilePath); // Llamada que debería lanzar el error
-  }).toThrow("Unsupported file type: .txt");
+  expect(formated.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });

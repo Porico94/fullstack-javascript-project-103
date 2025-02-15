@@ -1,42 +1,42 @@
-
 import _ from "lodash";
 
-const buildDiff = (file1, file2) => {
-  const allKeys = _.union(Object.keys(file1), Object.keys(file2)).sort(); // Todas las claves, ordenadas alfabéticamente
-  
-  return allKeys.map((key) => {
+const buildDiff = (file1, file2, depth = 1) => {
+  const allkeys = _.sortBy(_.union(Object.keys(file1), Object.keys(file2)));
+
+  return allkeys.flatMap((key) => {
+    // Si la clave solo existe en file2
     if (!_.has(file1, key)) {
-      // Clave solo en file2
-      return { key, prefix: "+", value: file2[key] };
+      return { key, prefix: "+", value: file2[key], depth };
     }
 
+    // Si la clave solo existe en file1
     if (!_.has(file2, key)) {
-      // Clave solo en file1
-      return { key, prefix: "-", value: file1[key] };
+      return { key, prefix: "-", value: file1[key], depth };
     }
 
     const value1 = file1[key];
     const value2 = file2[key];
 
-    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
-      // Si ambos valores son objetos, comparar recursivamente
+    // Si ambos valores son objetos, llamamos a buildDiff recursivamente
+    if (_.isObject(value1) && _.isObject(value2)) {
       return {
         key,
         prefix: " ",
-        children: buildDiff(value1, value2),
+        children: buildDiff(value1, value2, depth + 1),
+        depth,
       };
     }
 
-    if (value1 !== value2) {
-      // Valores diferentes
+    // Si los valores son diferentes
+    if (!_.isEqual(value1, value2)) {
       return [
-        {key, prefix: "-", value: value1},
-        {key, prefix: "+", value: value2}
+        { key, prefix: "-", value: value1, depth },
+        { key, prefix: "+", value: value2, depth },
       ];
     }
 
-    // Valores iguales
-    return { key, prefix: " ", value: value1 };
+    // Si los valores son iguales
+    return { key, prefix: " ", value: value1, depth };
   });
 };
 
