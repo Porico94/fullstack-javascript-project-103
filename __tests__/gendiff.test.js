@@ -3,6 +3,9 @@ import fileReader from "../src/fileReader.js";
 import buildDiff from "../src/buildDiff.js";
 import formatDiff from "../src/formats/indexFormat.js";
 import txtReader from "../src/txtReader.js";
+import { fileURLToPath } from "url";
+import path from "path";
+import fs from "fs";
 
 test("gendiff compare two files json forrmat stylish", () => {
   const file1Object = fileReader("file1.json");
@@ -80,4 +83,22 @@ test("gendiff compare one file json and another file yaml format plain", () => {
   const expected = txtReader("result-plain.txt").trim();
 
   expect(formated.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
+});
+
+test("gendiff compare one file json and another file yaml format json", () => {
+  
+  const file1Object = fileReader("file1.yml");
+  const file2Object = fileReader("file2.json");
+
+  const data = buildDiff(file1Object, file2Object);
+  const formattedOutput = formatDiff(data, 'json').trim();
+
+  // Leemos el resultado esperado desde el archivo json-result.json, ubicado en __fixtures__
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const absolutePath = path.join(__dirname, "..", "__fixtures__", 'json-result.json');
+  const expectedOutput = fs.readFileSync(absolutePath, "utf-8");
+  
+  // Parseamos ambas salidas a objetos y comparamos (para evitar diferencias en espacios, saltos de línea, etc.)
+  expect(JSON.parse(formattedOutput)).toEqual(JSON.parse(expectedOutput));
 });

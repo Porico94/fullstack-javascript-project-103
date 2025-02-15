@@ -6,3 +6,6 @@ https://asciinema.org/a/waLAajh5WRcnpK9mqg0QxpdQ2
 
 #### Prueba del analizador de archivos que soporta formato json y yaml con formato plain
 https://asciinema.org/a/0jskAIq7sITVnBGDVG78HLP72
+
+#### Prueba del analizador de archivos que soporta formato json y yaml con formato json
+https://asciinema.org/a/poyazExdX0RbmVMVAsK5oCpDS
