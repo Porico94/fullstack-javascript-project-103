@@ -3,7 +3,7 @@
 import { Command } from "commander";
 import fileReader from "../src/fileReader.js";
 import buildDiff from "../src/buildDiff.js";
-import formatDiff from "../src/formats/indexFormat.js";
+import formatDiff from "../src/formatters/indexFormat.js";
 
 const program = new Command();
 

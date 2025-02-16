@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import fileReader from "../src/fileReader.js";
 import buildDiff from "../src/buildDiff.js";
-import formatDiff from "../src/formats/indexFormat.js";
+import formatDiff from "../src/formatters/indexFormat.js";
 import txtReader from "../src/txtReader.js";
 import { fileURLToPath } from "url";
 import path from "path";
