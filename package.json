@@ -1,5 +1,5 @@
 {
-  "name": "@codica/code",
+  "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/Porico94/fullstack-javascript-project-103/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Porico94/fullstack-javascript-project-103/actions)",
   "main": "gendiff.js",
