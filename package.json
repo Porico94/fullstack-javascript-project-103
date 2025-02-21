@@ -2,10 +2,10 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "[![Actions Status](https://github.com/Porico94/fullstack-javascript-project-103/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/Porico94/fullstack-javascript-project-103/actions)",
-  "main": "gendiff.js",
+  "main": "genDiff.js",
   "type": "module",
   "bin": {
-    "gendiff": "./bin/gendiff.js"
+    "gendiff": "./bin/genDiff.js"
   },
   "scripts": {
     "test": "NODE_OPTIONS='--no-warnings --experimental-vm-modules' jest",

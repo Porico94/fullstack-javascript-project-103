@@ -1,51 +1,46 @@
-import formatPlain from "./formatObjectPlain.js";
+import { ADD_VALUE, DELETED_VALUE, CHANGED_VALUE, UNCHANGED_VALUE, NESTED_VALUE } from '../constants.js';
 
-const plainFormatter = (data, ancestry = "") => {
-  //Array donde iremos agregando cada linea de código
-  let list = [];
-
-  for (let i = 0; i < data.length; i++) {
-    //node representara cada objeto que recorremos
-    const node = data[i];
-    //Iremos creando la ruta acumulativamente
-    const pathProperty = ancestry ? `${ancestry}.${node.key}` : node.key;
-    //Si tiene children usamos recursividad y con el spread
-    if (node.children) {
-      list.push(...plainFormatter(node.children, pathProperty));
-    }
-    //Si tiene prefijo '-' y cumple varias condiciones entonces signfica que el nodo se actualizó.
-    if (
-      node.prefix === "-" &&
-      i + 1 < data.length &&
-      data[i + 1].key === node.key &&
-      data[i + 1].prefix === "+"
-    ) {
-      list.push(
-        `Property '${pathProperty}' was updated. From ${formatPlain(
-          node.value
-        )} to ${formatPlain(data[i + 1].value)}`
-      );
-      i++;
-      continue;
-    }
-    //Si solo tiene prefijo '-' signfica que fue removido.
-    if (node.prefix === "-") {
-      list.push(`Property '${pathProperty}' was removed`);
-      continue;
-    }
-    //Si solo tiene prefijo '+' significa que fue agregado.
-    if (node.prefix === "+") {
-      list.push(
-        `Property '${pathProperty}' was added with value: ${formatPlain(
-          node.value
-        )}`
-      );
-      continue;
-    }
-    // Si el nodo tiene prefix " " (sin cambios), no mostramos nada en el formato plain
+const formatValue = (val) => {
+  if (typeof val === 'object' && val !== null) {
+    return '[complex value]';
   }
-
-  return list;
+  if (typeof val === 'string') {
+    return `'${val}'`;
+  }
+  return String(val);
+  
 };
 
-export default (data) => plainFormatter(data).join("\n");
+const plainFormatter = (diff, ancestry = '') => {
+  let lines = [];
+
+  diff.forEach((node) => {
+    // Construir la ruta completa para la propiedad
+    const propertyPath = ancestry ? `${ancestry}.${node.key}` : node.key;
+
+    // Según el tipo de cambio, agregamos la línea correspondiente
+    switch (node.type) {
+      case ADD_VALUE:
+        lines.push(`Property '${propertyPath}' was added with value: ${formatValue(node.value)}`);
+        break;
+      case DELETED_VALUE:
+        lines.push(`Property '${propertyPath}' was removed`);
+        break;
+      case CHANGED_VALUE:
+        lines.push(`Property '${propertyPath}' was updated. From ${formatValue(node.value1)} to ${formatValue(node.value2)}`);
+        break;
+      case NESTED_VALUE:
+        // Si es un nodo anidado, procesamos recursivamente sus children y agregamos sus líneas
+        lines.push(plainFormatter(node.children, propertyPath));
+        break;
+      case UNCHANGED_VALUE:
+      default:
+        // No mostramos propiedades sin cambios en formato plain.
+        break;
+    }
+  });
+
+  return lines.join('\n');
+};
+
+export default plainFormatter;

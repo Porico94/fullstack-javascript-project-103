@@ -1,11 +1,21 @@
 /* eslint-disable no-undef */
-import fileReader from "../src/fileReader.js";
-import buildDiff from "../src/buildDiff.js";
-import formatDiff from "../src/formatters/indexFormat.js";
-import txtReader from "../src/txtReader.js";
+import fileReader from "../src/parsers.js";
+import buildDiff from "../src/diff.js";
+import formatDiff from "../src/formatters/index.js";
 import { fileURLToPath } from "url";
 import path from "path";
 import fs from "fs";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const txtReader = (filename) => {
+  const absolutePath = path.join(__dirname, "..", "__fixtures__", filename);
+  const data = fs.readFileSync(absolutePath, "utf-8"); // Transforma el formato JSON o YMl en un texto plano que es necesario para
+  // luego convertirlo en un objeto de javascript.
+  return data;
+};
+
 
 test("gendiff compare two files json forrmat stylish", () => {
   const file1Object = fileReader("file1.json");
