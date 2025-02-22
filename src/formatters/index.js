@@ -1,8 +1,8 @@
-import stylish from "./stylish.js";
+import renderAST from "./stylish.js";
 import plainFormatter from "./plain.js";
 
 const formatters = {
-  stylish,
+  stylish: renderAST,
   plain: plainFormatter,
 };
 

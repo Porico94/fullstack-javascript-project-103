@@ -36,3 +36,5 @@ const renderAST = (ast) => {
   const iterate = (node, depth) => renderFunctions[node.type](node, depth, iterate);
   return iterate(ast, 0);
 };
+
+export default renderAST;
