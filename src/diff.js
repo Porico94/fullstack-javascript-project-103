@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import {
   UNCHANGED_VALUE, ADD_VALUE, CHANGED_VALUE, DELETED_VALUE, NESTED_VALUE, ROOT_VALUE,
-} from '../constants.js';
+} from './constants.js';
 
 function getDiff(dataFile1, dataFile2) {
   const keys = _.sortBy(_.union(Object.keys(dataFile1), Object.keys(dataFile2)));
