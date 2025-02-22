@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import getDiff from './diff.js';
-import parseFile from './parse.js';
+import parseFile from './parsers.js';
 import format from './formatters/index.js';
 
 // eslint-disable-next-line no-undef
