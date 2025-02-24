@@ -32,7 +32,7 @@ const renderFunctions = {
     );
     return `${getIndentation(depth)}  ${key}: {\n${nestedChildren.join(
       '\n'
-    )},\n${getIndentation(depth)}  }`;
+    )}\n${getIndentation(depth)}  }`;
   },
   [ADD_VALUE]: (node, depth) =>
     `${getIndentation(depth)}+ ${node.key}: ${formatValue(
