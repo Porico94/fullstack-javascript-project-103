@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import fs from 'fs';
 import path from 'path';
 import getDiff from './diff.js';
@@ -36,4 +37,3 @@ export default function genDiff(path1, path2, formatType = 'stylish') {
   const formattedDiff = format(diff, formatType);
   return formattedDiff;
 }
-
