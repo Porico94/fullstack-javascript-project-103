@@ -13,11 +13,9 @@ const getIndentation = (depth, spacesCount = 4) =>
 
 const formatValue = (data, depth, renderFunctions) => {
   if (!_.isObject(data)) return String(data);
-
   const entries = Object.entries(data).map(([key, value]) =>
     renderFunctions[UNCHANGED_VALUE]({ key, value }, depth + 1)
   );
-
   return `{\n${entries.join('\n')}\n${getIndentation(depth)}  }`;
 };
 
@@ -34,7 +32,7 @@ const renderFunctions = {
     );
     return `${getIndentation(depth)}  ${key}: {\n${nestedChildren.join(
       '\n'
-    )}\n${getIndentation(depth)}  }`;
+    )},\n${getIndentation(depth)}  }`;
   },
   [ADD_VALUE]: (node, depth) =>
     `${getIndentation(depth)}+ ${node.key}: ${formatValue(
