@@ -4,6 +4,7 @@ import plainFormatter from "./plain.js";
 const formatters = {
   stylish: renderAST,
   plain: plainFormatter,
+  json: (diff) => JSON.stringify(diff, null, 2),
 };
 
 export default (diff, formatName = "stylish") => {
