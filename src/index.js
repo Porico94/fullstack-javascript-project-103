@@ -1,8 +1,8 @@
-import fs from "fs";
-import path from "path";
-import getDiff from "./diff.js";
-import parseFile from "./parsers.js";
-import format from "./formatters/index.js";
+import fs from 'fs';
+import path from 'path';
+import getDiff from './diff.js';
+import parseFile from './parsers.js';
+import format from './formatters/index.js';
 
  
 const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
@@ -27,7 +27,7 @@ export default function genDiff(path1, path2, formatType = 'stylish') {
 
   if (!firstFileData || !secondFileData) {
     console.error(
-      "Error reading one or both files. Please check the file paths and formats."
+      'Error reading one or both files. Please check the file paths and formats.'
     );
     return;
   }
@@ -36,3 +36,4 @@ export default function genDiff(path1, path2, formatType = 'stylish') {
   const formattedDiff = format(diff, formatType);
   return formattedDiff;
 }
+

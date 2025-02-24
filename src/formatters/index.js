@@ -1,5 +1,5 @@
-import renderAST from "./stylish.js";
-import plainFormatter from "./plain.js";
+import renderAST from './stylish.js';
+import plainFormatter from './plain.js';
 
 const formatters = {
   stylish: renderAST,
