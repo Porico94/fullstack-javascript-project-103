@@ -4,7 +4,6 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import genDiff from '../src/index.js';
 
-
 // Definimos __filename y __dirname para construir rutas relativas al directorio de tests
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,8 +25,10 @@ test('gendiff compare two files json format stylish', () => {
   // Se lee el resultado esperado desde __fixtures__/result-stylish.txt
   const expected = txtReader('stylish-result.txt').trim();
 
-  // Se comparan ambos resultados normalizando saltos de línea   
-  expect(formatted.replace(/\r\n/g, '\n')).toBe(expected.replace(/\r\n/g, '\n'));
+  // Se comparan ambos resultados normalizando saltos de línea
+  expect(formatted.replace(/\r\n/g, '\n')).toBe(
+    expected.replace(/\r\n/g, '\n')
+  );
 });
 
 test('gendiff compare one file json and another file yml with format stylish', () => {
@@ -42,10 +43,12 @@ test('gendiff compare one file json and another file yml with format stylish', (
   const expected = txtReader('stylish-result.txt').trim();
 
   // Se comparan ambos resultados normalizando saltos de línea
-   
-  expect(formatted.replace(/\r\n/g, '\n')).toBe(expected.replace(/\r\n/g, '\n'));
+
+  expect(formatted.replace(/\r\n/g, '\n')).toBe(
+    expected.replace(/\r\n/g, '\n')
+  );
 });
- 
+
 test('gendiff compare two files json with format plain', () => {
   // Construir rutas absolutas a los archivos de entrada
   const file1Path = path.join(__dirname, '..', '__fixtures__', 'file1.json');
@@ -58,9 +61,11 @@ test('gendiff compare two files json with format plain', () => {
   const expected = txtReader('plain-result.txt').trim();
 
   // Se comparan ambos resultados normalizando saltos de línea
-  expect(formatted.replace(/\r\n/g, '\n')).toBe(expected.replace(/\r\n/g, '\n'));
+  expect(formatted.replace(/\r\n/g, '\n')).toBe(
+    expected.replace(/\r\n/g, '\n')
+  );
 });
- 
+
 test('gendiff compare one file json and another file yml with format plain', () => {
   // Construir rutas absolutas a los archivos de entrada
   const file1Path = path.join(__dirname, '..', '__fixtures__', 'file1.yml');
@@ -71,6 +76,8 @@ test('gendiff compare one file json and another file yml with format plain', () 
   // Se lee el resultado esperado desde __fixtures__/result-stylish.txt
   const expected = txtReader('plain-result.txt').trim();
 
-  // Se comparan ambos resultados normalizando saltos de línea   
-  expect(formatted.replace(/\r\n/g, '\n')).toBe(expected.replace(/\r\n/g, '\n'));
+  // Se comparan ambos resultados normalizando saltos de línea
+  expect(formatted.replace(/\r\n/g, '\n')).toBe(
+    expected.replace(/\r\n/g, '\n')
+  );
 });

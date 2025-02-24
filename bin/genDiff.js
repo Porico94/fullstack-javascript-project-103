@@ -15,4 +15,3 @@ program
   })
 
   .parse(process.argv);
-  
