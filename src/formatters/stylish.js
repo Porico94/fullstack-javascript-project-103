@@ -8,8 +8,7 @@ import {
   UNCHANGED_VALUE,
 } from '../constants.js';
 
-const getIndentation = (depth, spacesCount = 4) =>
-  ' '.repeat(depth * spacesCount - 2);
+const getIndentation = (depth, spacesCount = 4) => ' '.repeat(depth * spacesCount - 2);
 
 const formatValue = (data, depth, renderFunctions) => {
   if (!_.isObject(data)) return String(data);
@@ -21,48 +20,44 @@ const formatValue = (data, depth, renderFunctions) => {
 
 const renderFunctions = {
   [ROOT_VALUE]: ({ children }, depth, iterate) => {
-    const renderedChildren = children.flatMap((child) =>
-      iterate(child, depth + 1)
-    );
+    const renderedChildren = children.flatMap((child) => iterate(child, depth + 1));
     return `{\n${renderedChildren.join('\n')}\n}`;
   },
   [NESTED_VALUE]: ({ key, children }, depth, iterate) => {
-    const nestedChildren = children.flatMap((child) =>
-      iterate(child, depth + 1)
-    );
-    return `${getIndentation(depth)}  ${key}: {\n${nestedChildren.join(
-      '\n'
-    )}\n${getIndentation(depth)}  }`;
+    const nestedChildren = children.flatMap((child) => iterate(child, depth + 1));
+    return `${getIndentation(depth)}  ${key}: {\n${nestedChildren.join('\n')}\n${getIndentation(
+      depth
+    )}  }`;
   },
   [ADD_VALUE]: (node, depth) =>
     `${getIndentation(depth)}+ ${node.key}: ${formatValue(
       node.value,
       depth,
-      renderFunctions
+      renderFunctions,
     )}`,
   [DELETED_VALUE]: (node, depth) =>
     `${getIndentation(depth)}- ${node.key}: ${formatValue(
       node.value,
       depth,
-      renderFunctions
+      renderFunctions,
     )}`,
   [UNCHANGED_VALUE]: (node, depth) =>
     `${getIndentation(depth)}  ${node.key}: ${formatValue(
       node.value,
       depth,
-      renderFunctions
+      renderFunctions,
     )}`,
   [CHANGED_VALUE]: (node, depth) => {
     const { key, value1, value2 } = node;
     const formattedValue1 = `${getIndentation(depth)}- ${key}: ${formatValue(
       value1,
       depth,
-      renderFunctions
+      renderFunctions,
     )}`;
     const formattedValue2 = `${getIndentation(depth)}+ ${key}: ${formatValue(
       value2,
       depth,
-      renderFunctions
+      renderFunctions,
     )}`;
     return [formattedValue1, formattedValue2].join('\n');
   },
