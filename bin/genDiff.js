@@ -12,5 +12,5 @@ program
   .action((path1, path2) => {
     console.log(genDiff(path1, path2, program.opts().format));
   })
-  // eslint-disable-next-line no-undef
+   
   .parse(process.argv);

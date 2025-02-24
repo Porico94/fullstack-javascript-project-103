@@ -7,7 +7,7 @@ const formatters = {
   json: (diff) => JSON.stringify(diff, null, 2),
 };
 
-export default (diff, formatName = "stylish") => {
+export default (diff, formatName = 'stylish') => {
   if (!formatters[formatName]) {
     throw new Error(`Unknown format: ${formatName}`);
   }

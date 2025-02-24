@@ -13,7 +13,7 @@ const txtReader = (filename) => {
   return fs.readFileSync(absolutePath, "utf-8");
 };
 
-// eslint-disable-next-line no-undef
+ 
 test("gendiff compare two files json format stylish", () => {
   // Construir rutas absolutas a los archivos de entrada
   const file1Path = path.join(__dirname, "..", "__fixtures__", "file1.json");
@@ -26,11 +26,11 @@ test("gendiff compare two files json format stylish", () => {
   const expected = txtReader("stylish-result.txt").trim();
 
   // Se comparan ambos resultados normalizando saltos de línea
-  // eslint-disable-next-line no-undef
+   
   expect(formatted.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });
 
-// eslint-disable-next-line no-undef
+ 
 test("gendiff compare one file json and another file yml with format stylish", () => {
   // Construir rutas absolutas a los archivos de entrada
   const file1Path = path.join(__dirname, "..", "__fixtures__", "file1.json");
@@ -43,11 +43,11 @@ test("gendiff compare one file json and another file yml with format stylish", (
   const expected = txtReader("stylish-result.txt").trim();
 
   // Se comparan ambos resultados normalizando saltos de línea
-  // eslint-disable-next-line no-undef
+   
   expect(formatted.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });
 
-// eslint-disable-next-line no-undef
+ 
 test("gendiff compare two files json with format plain", () => {
   // Construir rutas absolutas a los archivos de entrada
   const file1Path = path.join(__dirname, "..", "__fixtures__", "file1.json");
@@ -60,11 +60,11 @@ test("gendiff compare two files json with format plain", () => {
   const expected = txtReader("plain-result.txt").trim();
 
   // Se comparan ambos resultados normalizando saltos de línea
-  // eslint-disable-next-line no-undef
+   
   expect(formatted.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });
 
-// eslint-disable-next-line no-undef
+ 
 test("gendiff compare one file json and another file yml with format plain", () => {
   // Construir rutas absolutas a los archivos de entrada
   const file1Path = path.join(__dirname, "..", "__fixtures__", "file1.yml");
@@ -77,6 +77,6 @@ test("gendiff compare one file json and another file yml with format plain", () 
   const expected = txtReader("plain-result.txt").trim();
 
   // Se comparan ambos resultados normalizando saltos de línea
-  // eslint-disable-next-line no-undef
+   
   expect(formatted.replace(/\r\n/g, "\n")).toBe(expected.replace(/\r\n/g, "\n"));
 });
