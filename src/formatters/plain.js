@@ -8,13 +8,15 @@ const formatValue = (val) => {
     return `'${val}'`;
   }
   return String(val);
-  
 };
 
 const plainFormatter = (diff, ancestry = '') => {
   let lines = [];
 
-  diff.forEach((node) => {
+  // Si diff es el objeto raíz con la propiedad children, itera sobre ella.
+  const nodes = diff.children || diff;
+
+  nodes.forEach((node) => {
     // Construir la ruta completa para la propiedad
     const propertyPath = ancestry ? `${ancestry}.${node.key}` : node.key;
 
@@ -30,12 +32,12 @@ const plainFormatter = (diff, ancestry = '') => {
         lines.push(`Property '${propertyPath}' was updated. From ${formatValue(node.value1)} to ${formatValue(node.value2)}`);
         break;
       case NESTED_VALUE:
-        // Si es un nodo anidado, procesamos recursivamente sus children y agregamos sus líneas
+        // Procesa recursivamente los nodos anidados.
         lines.push(plainFormatter(node.children, propertyPath));
         break;
       case UNCHANGED_VALUE:
       default:
-        // No mostramos propiedades sin cambios en formato plain.
+        // No se muestra nada para nodos sin cambios.
         break;
     }
   });
