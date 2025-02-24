@@ -17,7 +17,7 @@ export default function parseFile(data, extension) {
     return parser(data);
   } catch (error) {
     throw new Error(
-      `Failed to parse data with extension '${extension}': ${error.message}`
+      `Failed to parse data with extension '${extension}': ${error.message}`,
     );
   }
 }

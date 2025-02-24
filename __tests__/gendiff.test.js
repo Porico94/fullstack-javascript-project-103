@@ -27,7 +27,7 @@ test('gendiff compare two files json format stylish', () => {
 
   // Se comparan ambos resultados normalizando saltos de línea
   expect(formatted.replace(/\r\n/g, '\n')).toBe(
-    expected.replace(/\r\n/g, '\n')
+    expected.replace(/\r\n/g, '\n'),
   );
 });
 
@@ -45,7 +45,7 @@ test('gendiff compare one file json and another file yml with format stylish', (
   // Se comparan ambos resultados normalizando saltos de línea
 
   expect(formatted.replace(/\r\n/g, '\n')).toBe(
-    expected.replace(/\r\n/g, '\n')
+    expected.replace(/\r\n/g, '\n'),
   );
 });
 
@@ -62,7 +62,7 @@ test('gendiff compare two files json with format plain', () => {
 
   // Se comparan ambos resultados normalizando saltos de línea
   expect(formatted.replace(/\r\n/g, '\n')).toBe(
-    expected.replace(/\r\n/g, '\n')
+    expected.replace(/\r\n/g, '\n'),
   );
 });
 
@@ -78,6 +78,6 @@ test('gendiff compare one file json and another file yml with format plain', () 
 
   // Se comparan ambos resultados normalizando saltos de línea
   expect(formatted.replace(/\r\n/g, '\n')).toBe(
-    expected.replace(/\r\n/g, '\n')
+    expected.replace(/\r\n/g, '\n'),
   );
 });

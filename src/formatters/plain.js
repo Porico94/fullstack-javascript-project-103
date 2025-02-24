@@ -1,4 +1,10 @@
-import { ADD_VALUE, DELETED_VALUE, CHANGED_VALUE, UNCHANGED_VALUE, NESTED_VALUE } from '../constants.js';
+import {
+  ADD_VALUE,
+  DELETED_VALUE,
+  CHANGED_VALUE,
+  UNCHANGED_VALUE,
+  NESTED_VALUE,
+} from '../constants.js';
 
 const formatValue = (val) => {
   if (typeof val === 'object' && val !== null) {
@@ -23,13 +29,21 @@ const plainFormatter = (diff, ancestry = '') => {
     // Según el tipo de cambio, agregamos la línea correspondiente
     switch (node.type) {
       case ADD_VALUE:
-        lines.push(`Property '${propertyPath}' was added with value: ${formatValue(node.value)}`);
+        lines.push(
+          `Property '${propertyPath}' was added with value: ${formatValue(
+            node.value
+          )}`
+        );
         break;
       case DELETED_VALUE:
         lines.push(`Property '${propertyPath}' was removed`);
         break;
       case CHANGED_VALUE:
-        lines.push(`Property '${propertyPath}' was updated. From ${formatValue(node.value1)} to ${formatValue(node.value2)}`);
+        lines.push(
+          `Property '${propertyPath}' was updated. From ${formatValue(
+            node.value1
+          )} to ${formatValue(node.value2)}`
+        );
         break;
       case NESTED_VALUE:
         // Procesa recursivamente los nodos anidados.
