@@ -12,7 +12,8 @@ const getIndentation = (depth, spacesCount = 4) => ' '.repeat(depth * spacesCoun
 
 const formatValue = (data, depth, renderFunctions) => {
   if (!_.isObject(data)) return String(data);
-  const entries = Object.entries(data).map(([key, value]) => renderFunctions[UNCHANGED_VALUE]({ key, value }, depth + 1));
+  const entries = Object.entries(data).map(([key, value]) => 
+    renderFunctions[UNCHANGED_VALUE]({ key, value }, depth + 1));
   return `{\n${entries.join('\n')}\n${getIndentation(depth)}  }`;
 };
 
